@@ -1,0 +1,46 @@
+body {
+  background-color: #efefef;
+}
+
+h1 {
+  font-size: 48px;
+}
+
+.container {
+  display: inline-block;
+  max-width: 50rem;
+  text-align: start;
+  /* border: 1px solid black; */
+}
+
+.btn {
+  margin: 5rem;
+}
+
+h1::before {
+  content: "My ";
+  color: #ea4355;
+}
+
+span {
+  font-size: 36px;
+  color: gray;
+}
+
+.link {
+  color: #ea4355;
+  text-decoration: none;
+  font-size: 17px;
+  margin: 1rem;
+}
+
+.banner {
+  margin: 5rem;
+  display: inline-block;
+  /* border: 1px solid black; */
+}
+
+.img {
+  max-height: 30rem;
+  max-width: 25rem;
+}
