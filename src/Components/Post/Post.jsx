@@ -1,26 +1,48 @@
-import { useContext } from "react";
-import { PostContext } from "../../Contexts/PostContext";
+import { useContext, useEffect } from "react";
+import { userContext } from "../../Contexts/UserContext";
 import Button from "../Button/Button";
 import styles from "./Post.module.css";
 
 const Post = ({ postData }) => {
-  const { postState, dispachPostReducer } = useContext(PostContext);
+  const { userState, dispatchUserReducer, getBookmarkData } =
+    useContext(userContext);
   // console.log(postData);
+  const userToken = localStorage.getItem("encodedToken");
 
   const postBookmarkData = async (postId) => {
     try {
-      const response = await fetch(`/api/users/bookmark/:${postId}`, {
+      const response = await fetch(`/api/users/bookmark/${postId}/`, {
         method: "POST",
+        headers: { authorization: userToken },
       });
-      console.log(response._bodyText);
+      console.log(response);
+      dispatchUserReducer({ type: "ADD_IN_BOOKMARK", payload: postId });
+      // console.log(response._bodyText);
     } catch (error) {
       console.log(error);
     }
   };
 
-  const bookmarkHandler = () => {
+  const removeBookmarkData = async (postId) => {
+    try {
+      const response = await fetch(`/api/users/remove-bookmark/${postId}/`, {
+        method: "POST",
+        headers: { authorization: userToken },
+      });
+      console.log(response);
+      dispatchUserReducer({ type: "REMOVE_IN_BOOKMARK", payload: postId });
+      // console.log(response._bodyText);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const addBookmarkHandler = () => {
     postBookmarkData(postData._id);
-    // dispachPostReducer({type:'ADD_BOOKMARK',value:postData})
+  };
+
+  const removeBookmarkHandler = () => {
+    removeBookmarkData(postData._id);
   };
 
   return (
@@ -34,7 +56,11 @@ const Post = ({ postData }) => {
         <div>
           <Button>like</Button>
           <Button>comment</Button>
-          <Button onClick={bookmarkHandler}>bookmark</Button>
+          {userState.inBookmark[postData._id] ? (
+            <Button onClick={removeBookmarkHandler}>Remove Bookmark</Button>
+          ) : (
+            <Button onClick={addBookmarkHandler}>Add bookmark</Button>
+          )}
         </div>
         <br />
       </div>
