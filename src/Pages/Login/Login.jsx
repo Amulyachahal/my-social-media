@@ -26,6 +26,7 @@ const Login = () => {
   useEffect(() => {
     if (loginAttempted && userData.foundUser) {
       localStorage.setItem("encodedToken", userData.encodedToken);
+      localStorage.setItem("user", userData.foundUser.username);
       navigate("/");
     }
     if (loginAttempted && userData.errors) {

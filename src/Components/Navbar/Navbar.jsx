@@ -1,6 +1,9 @@
 import Button from "../Button/Button";
 import styles from "./Navbar.module.css";
+
 import { useNavigate } from "react-router";
+import { MdExplore, MdHome, MdBookmarks, MdLogout } from "react-icons/md";
+import { GiPlagueDoctorProfile } from "react-icons/gi";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -26,8 +29,14 @@ const Navbar = () => {
       >
         Bookmarks
       </Button>
-      <Button onClick={logoutHandeler}>Logout</Button>
-      <Button>Add Post</Button>
+      <Button
+        onClick={() => {
+          navigate("/profile");
+        }}
+      >
+        Profile
+      </Button>
+      <Button onClick={logoutHandeler}>Logout </Button>
     </>
   );
 };

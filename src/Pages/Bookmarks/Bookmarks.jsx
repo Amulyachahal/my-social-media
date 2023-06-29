@@ -7,7 +7,7 @@ const Bookmarks = () => {
   const { userState, getBookmarkData } = useContext(userContext);
   useEffect(() => {
     getBookmarkData();
-  }, []);
+  }, [userState.inBookmark]);
 
   return (
     <>

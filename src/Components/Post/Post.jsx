@@ -1,41 +1,25 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { userContext } from "../../Contexts/UserContext";
-import Button from "../Button/Button";
+import { PostContext } from "../../Contexts/PostContext";
+
+import { FiBookmark } from "react-icons/fi";
+import { AiFillDelete, AiFillEdit } from "react-icons/ai";
+import {
+  FcLike,
+  FcLikePlaceholder,
+  FcBookmark,
+  FcComments,
+} from "react-icons/fc";
+
 import styles from "./Post.module.css";
+import Modal from "../Modal/Modal";
 
 const Post = ({ postData }) => {
-  const { userState, dispatchUserReducer, getBookmarkData } =
+  const { userState, postBookmarkData, removeBookmarkData } =
     useContext(userContext);
-  // console.log(postData);
-  const userToken = localStorage.getItem("encodedToken");
 
-  const postBookmarkData = async (postId) => {
-    try {
-      const response = await fetch(`/api/users/bookmark/${postId}/`, {
-        method: "POST",
-        headers: { authorization: userToken },
-      });
-      console.log(response);
-      dispatchUserReducer({ type: "ADD_IN_BOOKMARK", payload: postId });
-      // console.log(response._bodyText);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const removeBookmarkData = async (postId) => {
-    try {
-      const response = await fetch(`/api/users/remove-bookmark/${postId}/`, {
-        method: "POST",
-        headers: { authorization: userToken },
-      });
-      console.log(response);
-      dispatchUserReducer({ type: "REMOVE_IN_BOOKMARK", payload: postId });
-      // console.log(response._bodyText);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const { postState, dispatchPostReducer, likePost, dislikePost, deletePost } =
+    useContext(PostContext);
 
   const addBookmarkHandler = () => {
     postBookmarkData(postData._id);
@@ -43,6 +27,21 @@ const Post = ({ postData }) => {
 
   const removeBookmarkHandler = () => {
     removeBookmarkData(postData._id);
+  };
+
+  const likeHandler = () => {
+    likePost(postData._id);
+  };
+  const dislikeHandler = () => {
+    dislikePost(postData._id);
+  };
+
+  const deleteHandler = () => {
+    deletePost(postData._id);
+  };
+
+  const editHandler = () => {
+    dispatchPostReducer({ type: "START_EDIT", value: postData });
   };
 
   return (
@@ -54,13 +53,23 @@ const Post = ({ postData }) => {
         <div className={styles.content}>{postData.content}</div>
         <br />
         <div>
-          <Button>like</Button>
-          <Button>comment</Button>
-          {userState.inBookmark[postData._id] ? (
-            <Button onClick={removeBookmarkHandler}>Remove Bookmark</Button>
+          {postState.liked[postData._id] ? (
+            <FcLike onClick={dislikeHandler} />
           ) : (
-            <Button onClick={addBookmarkHandler}>Add bookmark</Button>
+            <FcLikePlaceholder onClick={likeHandler} />
           )}
+          <FcComments
+            onClick={() => {
+              console.log("commented");
+            }}
+          />
+          {userState.inBookmark[postData._id] ? (
+            <FcBookmark onClick={removeBookmarkHandler} />
+          ) : (
+            <FiBookmark onClick={addBookmarkHandler} />
+          )}
+          <AiFillDelete onClick={deleteHandler} />
+          <AiFillEdit onClick={editHandler} />
         </div>
         <br />
       </div>

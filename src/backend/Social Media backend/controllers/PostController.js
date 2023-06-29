@@ -59,7 +59,7 @@ export const getAllUserPostsHandler = function (schema, request) {
 
 /**
  * This handler handles creating a post in the db.
- * send POST Request at /api/user/posts/
+ * send POST Request at /api/posts/
  * body contains {content}
  * */
 
@@ -77,7 +77,9 @@ export const createPostHandler = function (schema, request) {
         }
       );
     }
+    // console.log(request);
     const { postData } = JSON.parse(request.requestBody);
+    // console.log(postData, request.requestBody);
     const post = {
       _id: uuid(),
       ...postData,
@@ -167,7 +169,16 @@ export const likePostHandler = function (schema, request) {
         }
       );
     }
-    const { _id, firstName, lastName, username, createdAt, updatedAt, followers, following } = user;
+    const {
+      _id,
+      firstName,
+      lastName,
+      username,
+      createdAt,
+      updatedAt,
+      followers,
+      following,
+    } = user;
     const postId = request.params.postId;
     const post = schema.posts.findBy({ _id: postId }).attrs;
     if (post.likes.likedBy.some((currUser) => currUser._id === user._id)) {
@@ -181,7 +192,16 @@ export const likePostHandler = function (schema, request) {
       (currUser) => currUser._id !== user._id
     );
     post.likes.likeCount += 1;
-    post.likes.likedBy.push({ _id, firstName, lastName, username, createdAt, updatedAt, followers, following });
+    post.likes.likedBy.push({
+      _id,
+      firstName,
+      lastName,
+      username,
+      createdAt,
+      updatedAt,
+      followers,
+      following,
+    });
     this.db.posts.update({ _id: postId }, { ...post, updatedAt: formatDate() });
     return new Response(201, {}, { posts: this.db.posts });
   } catch (error) {

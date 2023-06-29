@@ -1,3 +1,16 @@
 .body {
   background-color: #efefef;
 }
+
+.container {
+  max-width: 27.5rem;
+  border: solid 1px #efefef;
+  margin: 0 auto;
+  /* box-shadow: 0 0 20px rgba(0, 0, 0, 0.3); */
+}
+
+.input {
+  padding: 2.5rem 1rem;
+  margin-bottom: 1rem;
+  font-size: 18px;
+}

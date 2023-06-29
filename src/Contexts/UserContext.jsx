@@ -16,8 +16,6 @@ export const UserProvider = ({ children }) => {
   const getAllUsers = async () => {
     try {
       const response = await fetch("/api/users");
-      const usersArray = JSON.parse(response._bodyText).users;
-      //   console.log(usersArray);
 
       dispatchUserReducer({
         type: "SET_ALL_USERS",
@@ -44,6 +42,30 @@ export const UserProvider = ({ children }) => {
     }
   };
 
+  const postBookmarkData = async (postId) => {
+    try {
+      const response = await fetch(`/api/users/bookmark/${postId}/`, {
+        method: "POST",
+        headers: { authorization: userToken },
+      });
+      dispatchUserReducer({ type: "ADD_IN_BOOKMARK", payload: postId });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const removeBookmarkData = async (postId) => {
+    try {
+      const response = await fetch(`/api/users/remove-bookmark/${postId}/`, {
+        method: "POST",
+        headers: { authorization: userToken },
+      });
+      dispatchUserReducer({ type: "REMOVE_IN_BOOKMARK", payload: postId });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   //   const fetchUser = async (userId) => {
   //     try {
   //       const response = await fetch(`/api/users/${userId}`);
@@ -58,11 +80,18 @@ export const UserProvider = ({ children }) => {
 
   useEffect(() => {
     getAllUsers();
+    // getBookmarkData();
   }, []);
 
   return (
     <userContext.Provider
-      value={{ userState, dispatchUserReducer, getBookmarkData }}
+      value={{
+        userState,
+        dispatchUserReducer,
+        getBookmarkData,
+        postBookmarkData,
+        removeBookmarkData,
+      }}
     >
       {children}
     </userContext.Provider>
