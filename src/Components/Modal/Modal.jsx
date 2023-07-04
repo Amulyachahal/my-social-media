@@ -8,6 +8,7 @@ const Modal = () => {
   const { postState, dispatchPostReducer, editPost } = useContext(PostContext);
 
   const postData = postState.postData;
+  const userToken = localStorage.getItem("encodedToken");
 
   const [edit, setEdit] = useState(postData.content);
 
@@ -16,7 +17,7 @@ const Modal = () => {
   };
 
   const saveEditHandler = () => {
-    editPost(edit, postData._id);
+    editPost(edit, postData._id, userToken);
     dispatchPostReducer({ type: "END_EDIT" });
   };
 

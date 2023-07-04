@@ -21,6 +21,7 @@ const Post = ({ postData }) => {
     useContext(PostContext);
 
   const userName = localStorage.getItem("user");
+  const userToken = localStorage.getItem("encodedToken");
 
   const addBookmarkHandler = () => {
     postBookmarkData(postData._id);
@@ -31,14 +32,14 @@ const Post = ({ postData }) => {
   };
 
   const likeHandler = () => {
-    likePost(postData._id);
+    likePost(postData._id, userToken);
   };
   const dislikeHandler = () => {
-    dislikePost(postData._id);
+    dislikePost(postData._id, userToken);
   };
 
   const deleteHandler = () => {
-    deletePost(postData._id);
+    deletePost(postData._id, userToken);
   };
 
   const editHandler = () => {

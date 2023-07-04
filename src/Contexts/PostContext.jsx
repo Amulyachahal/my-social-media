@@ -12,13 +12,9 @@ export const PostProvider = ({ children }) => {
     postData: {},
   });
 
-  const userToken = localStorage.getItem("encodedToken");
-
   const getAllPosts = async () => {
     try {
       const response = await fetch("/api/posts");
-      // const allPosts = JSON.parse(response._bodyText).posts;
-      // console.log(allPosts);
 
       dispatchPostReducer({
         type: "SET_ALL_POSTS",
@@ -64,11 +60,11 @@ export const PostProvider = ({ children }) => {
     }
   };
 
-  const likePost = async (postId) => {
+  const likePost = async (postId, token) => {
     try {
       const response = await fetch(`/api/posts/like/${postId}/`, {
         method: "POST",
-        headers: { authorization: userToken },
+        headers: { authorization: token },
       });
       console.log(JSON.parse(response._bodyText));
       dispatchPostReducer({ type: "IS_LIKED", payload: postId });
@@ -77,11 +73,11 @@ export const PostProvider = ({ children }) => {
     }
   };
 
-  const dislikePost = async (postId) => {
+  const dislikePost = async (postId, token) => {
     try {
       const response = await fetch(`/api/posts/dislike/${postId}/`, {
         method: "POST",
-        headers: { authorization: userToken },
+        headers: { authorization: token },
       });
       console.log(JSON.parse(response._bodyText));
       dispatchPostReducer({ type: "IS_DISLIKED", payload: postId });
@@ -90,12 +86,12 @@ export const PostProvider = ({ children }) => {
     }
   };
 
-  const deletePost = async (postId) => {
+  const deletePost = async (postId, token) => {
     // console.log(postId);
     try {
       const response = await fetch(`/api/posts/${postId}`, {
         method: "DELETE",
-        headers: { authorization: userToken },
+        headers: { authorization: token },
       });
       console.log(response);
 
@@ -109,11 +105,11 @@ export const PostProvider = ({ children }) => {
     }
   };
 
-  const editPost = async (edit, postId) => {
+  const editPost = async (edit, postId, token) => {
     try {
       const response = await fetch(`/api/posts/edit/${postId}`, {
         method: "POST",
-        headers: { authorization: userToken },
+        headers: { authorization: token },
         body: JSON.stringify({ postData: { content: edit } }),
       });
       console.log(JSON.parse(response._bodyText));
