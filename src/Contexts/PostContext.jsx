@@ -17,7 +17,7 @@ export const PostProvider = ({ children }) => {
   const getAllPosts = async () => {
     try {
       const response = await fetch("/api/posts");
-      const allPosts = JSON.parse(response._bodyText).posts;
+      // const allPosts = JSON.parse(response._bodyText).posts;
       // console.log(allPosts);
 
       dispatchPostReducer({
@@ -32,7 +32,7 @@ export const PostProvider = ({ children }) => {
   const getUserPosts = async (username) => {
     try {
       const response = await fetch(`api/posts/user/${username}`);
-      const userPosts = JSON.parse(response._bodyText).posts;
+      // const userPosts = JSON.parse(response._bodyText).posts;
       // console.log(userPosts);
 
       dispatchPostReducer({

@@ -1,9 +1,9 @@
 import { useNavigate } from "react-router";
-import { MdExplore, MdHome, MdBookmarks, MdLogout } from "react-icons/md";
-import { GiPlagueDoctorProfile } from "react-icons/gi";
+// import { MdExplore, MdHome, MdBookmarks, MdLogout } from "react-icons/md";
+// import { GiPlagueDoctorProfile } from "react-icons/gi";
 
 import Button from "../Button/Button";
-import styles from "./Navbar.module.css";
+// import styles from "./Navbar.module.css";
 import { NavLink } from "react-router-dom";
 
 const Navbar = () => {

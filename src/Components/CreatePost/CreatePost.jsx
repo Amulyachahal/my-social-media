@@ -24,7 +24,7 @@ const CreatePost = () => {
           onChange={(event) => setInput(event.target.value)}
           className={styles.input}
         />
-        <Button disabled={input.length == 0} onClick={createPostHandler}>
+        <Button disabled={input.length === 0} onClick={createPostHandler}>
           Add Post
         </Button>
       </div>
