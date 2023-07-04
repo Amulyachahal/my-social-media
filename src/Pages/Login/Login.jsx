@@ -29,7 +29,7 @@ const Login = () => {
       localStorage.setItem("encodedToken", userData.encodedToken);
       localStorage.setItem("user", userData.foundUser.username);
       localStorage.setItem("userId", userData.foundUser._id);
-      navigate("/");
+      navigate("/home");
     }
     if (loginAttempted && userData.errors) {
       alert(userData.errors[0]);

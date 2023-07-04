@@ -16,7 +16,7 @@ const Navbar = () => {
 
   return (
     <>
-      <Button onClick={() => navigate("/")}>Home</Button>
+      <Button onClick={() => navigate("/home")}>Home</Button>
       <Button
         onClick={() => {
           navigate("/explore");
