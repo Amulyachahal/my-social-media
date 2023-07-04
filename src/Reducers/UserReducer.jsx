@@ -2,6 +2,8 @@ export const UserReducer = (state, action) => {
   switch (action.type) {
     case "SET_ALL_USERS":
       return { ...state, users: [...action.payload] };
+    case "SET_USER":
+      return { ...state, userData: { ...action.payload } };
     case "SET_BOOKMARK":
       return { ...state, userBookmark: [...action.payload] };
     case "ADD_IN_BOOKMARK":
@@ -13,6 +15,16 @@ export const UserReducer = (state, action) => {
       return {
         ...state,
         inBookmark: { ...state.inBookmark, [action.payload]: false },
+      };
+    case "FOLLOW":
+      return {
+        ...state,
+        following: { ...state.following, [action.payload]: true },
+      };
+    case "UN_FOLLOW":
+      return {
+        ...state,
+        following: { ...state.following, [action.payload]: false },
       };
     default:
       return { state };

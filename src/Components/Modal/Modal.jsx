@@ -1,7 +1,8 @@
 import { useContext, useState } from "react";
+import { PostContext } from "../../Contexts/PostContext";
+
 import Button from "../Button/Button";
 import styles from "./Modal.module.css";
-import { PostContext } from "../../Contexts/PostContext";
 
 const Modal = () => {
   const { postState, dispatchPostReducer, editPost } = useContext(PostContext);

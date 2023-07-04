@@ -1,0 +1,21 @@
+.suggestedusers {
+  width: 27.5rem;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  align-self: flex-end;
+}
+.heading {
+  font-size: 24px;
+  margin-bottom: 1rem;
+  font-weight: bolder;
+}
+.title {
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 14px;
+}
+.username {
+  font-size: 14px;
+  color: gray;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+}

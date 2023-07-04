@@ -1,7 +1,8 @@
-import styles from "./Signup.module.css";
 import { useNavigate } from "react-router";
-import Button from "../../Components/Button/Button";
 import { useEffect, useState } from "react";
+
+import styles from "./Signup.module.css";
+import Button from "../../Components/Button/Button";
 
 const Signup = () => {
   const navigate = useNavigate();

@@ -12,7 +12,6 @@ import {
 } from "react-icons/fc";
 
 import styles from "./Post.module.css";
-import Modal from "../Modal/Modal";
 
 const Post = ({ postData }) => {
   const { userState, postBookmarkData, removeBookmarkData } =
@@ -20,6 +19,8 @@ const Post = ({ postData }) => {
 
   const { postState, dispatchPostReducer, likePost, dislikePost, deletePost } =
     useContext(PostContext);
+
+  const userName = localStorage.getItem("user");
 
   const addBookmarkHandler = () => {
     postBookmarkData(postData._id);
@@ -68,8 +69,12 @@ const Post = ({ postData }) => {
           ) : (
             <FiBookmark onClick={addBookmarkHandler} />
           )}
-          <AiFillDelete onClick={deleteHandler} />
-          <AiFillEdit onClick={editHandler} />
+          {postData.username === userName && (
+            <>
+              <AiFillDelete onClick={deleteHandler} />
+              <AiFillEdit onClick={editHandler} />
+            </>
+          )}
         </div>
         <br />
       </div>

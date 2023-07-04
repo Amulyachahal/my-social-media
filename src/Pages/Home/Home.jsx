@@ -1,42 +1,23 @@
 import Navbar from "../../Components/Navbar/Navbar";
 import styles from "./Home.module.css";
-
-import { PostContext } from "../../Contexts/PostContext";
-import { useContext, useState } from "react";
-
 import Post from "../../Components/Post/Post";
-import Button from "../../Components/Button/Button";
 import Modal from "../../Components/Modal/Modal";
+import Suggestedusers from "../../Components/SuggestedUsers/SuggestedUsers";
+import CreatePost from "../../Components/CreatePost/CreatePost";
+
+import { useContext, useEffect } from "react";
+import { PostContext } from "../../Contexts/PostContext";
+import { userContext } from "../../Contexts/UserContext";
 
 const Home = () => {
-  const { postState, dispatchPostReducer } = useContext(PostContext);
-  const userToken = localStorage.getItem("encodedToken");
+  const { postState } = useContext(PostContext);
+  const { getUser, getAllUsers } = useContext(userContext);
+  const userId = localStorage.getItem("userId");
 
-  const [input, setInput] = useState("");
-  // console.log(postState.posts.reverse());
-
-  const createPost = async () => {
-    try {
-      const response = await fetch("/api/posts", {
-        method: "POST",
-        headers: { authorization: userToken },
-        body: JSON.stringify({ postData: { content: input } }),
-      });
-
-      console.log(JSON.parse(response._bodyText).posts);
-      dispatchPostReducer({
-        type: "SET_ALL_POSTS",
-        payload: JSON.parse(response._bodyText).posts,
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const createPostHandler = () => {
-    createPost();
-    setInput("");
-  };
+  useEffect(() => {
+    getUser(userId);
+    getAllUsers();
+  }, []);
 
   return (
     <>
@@ -46,26 +27,21 @@ const Home = () => {
         {postState.isEditing ? (
           <Modal />
         ) : (
-          <>
-            <div className={styles.container}>
-              <input
-                type="text"
-                value={input}
-                placeholder="Write something interesting..."
-                onChange={(event) => setInput(event.target.value)}
-                className={styles.input}
-              />
-              <Button onClick={createPostHandler}>Add Post</Button>
+          <div className={styles.flexcontainer}>
+            <div className={styles.mainbody}>
+              <CreatePost />
+              <div>
+                <ul>
+                  {postState.allPosts.map((post, index) => (
+                    <Post postData={post} key={index} />
+                  ))}
+                </ul>
+              </div>
             </div>
-
-            <div>
-              <ul>
-                {postState.allPosts.map((post, index) => (
-                  <Post postData={post} key={index} />
-                ))}
-              </ul>
+            <div className={styles.suggestedusers}>
+              <Suggestedusers />
             </div>
-          </>
+          </div>
         )}
       </div>
     </>

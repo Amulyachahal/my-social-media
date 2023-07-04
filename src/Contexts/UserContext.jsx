@@ -1,6 +1,5 @@
 import { createContext, useEffect, useReducer } from "react";
 import { UserReducer } from "../Reducers/UserReducer";
-// import { getAllUsers } from "../Services/UserService";
 
 export const userContext = createContext();
 
@@ -9,6 +8,8 @@ export const UserProvider = ({ children }) => {
     users: [],
     userBookmark: [],
     inBookmark: {},
+    userData: {},
+    following: {},
   });
 
   const userToken = localStorage.getItem("encodedToken");
@@ -21,6 +22,32 @@ export const UserProvider = ({ children }) => {
         type: "SET_ALL_USERS",
         payload: JSON.parse(response._bodyText).users,
       });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const followUser = async (followUserId) => {
+    try {
+      const response = await fetch(`/api/users/follow/${followUserId}/`, {
+        method: "POST",
+        headers: { authorization: userToken },
+      });
+      console.log(JSON.parse(response._bodyText));
+      dispatchUserReducer({ type: "FOLLOW", payload: followUserId });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const unfollowUser = async (followUserId) => {
+    try {
+      const response = await fetch(`/api/users/unfollow/${followUserId}/`, {
+        method: "POST",
+        headers: { authorization: userToken },
+      });
+      console.log(JSON.parse(response._bodyText));
+      dispatchUserReducer({ type: "UN_FOLLOW", payload: followUserId });
     } catch (error) {
       console.log(error);
     }
@@ -65,22 +92,26 @@ export const UserProvider = ({ children }) => {
       console.log(error);
     }
   };
+  const userId = localStorage.getItem("userId");
 
-  //   const fetchUser = async (userId) => {
-  //     try {
-  //       const response = await fetch(`/api/users/${userId}`);
-  //       //   const usersArray = JSON.parse(response);
-  //       console.log(response);
+  const getUser = async (userId) => {
+    try {
+      const response = await fetch(`/api/users/${userId}`, { method: "GET" });
+      console.log(JSON.parse(response._bodyText));
+      dispatchUserReducer({
+        type: "SET_USER",
+        payload: JSON.parse(response._bodyText),
+      });
 
-  //       console.log(state.users);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
+      // console.log(state.users);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     getAllUsers();
-    // getBookmarkData();
+    getUser(userId);
   }, []);
 
   return (
@@ -91,6 +122,10 @@ export const UserProvider = ({ children }) => {
         getBookmarkData,
         postBookmarkData,
         removeBookmarkData,
+        getUser,
+        followUser,
+        unfollowUser,
+        getAllUsers,
       }}
     >
       {children}

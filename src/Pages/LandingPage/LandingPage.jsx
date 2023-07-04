@@ -1,10 +1,11 @@
 import { NavLink, useNavigate } from "react-router-dom";
-import Button from "../../Components/Button/Button";
-import styles from "./LandingPage.module.css";
-import landingpage from "../../Images/LandingPage/landingpage.jpg";
 import { useContext } from "react";
 import { userContext } from "../../Contexts/UserContext";
 import { PostContext } from "../../Contexts/PostContext";
+
+import Button from "../../Components/Button/Button";
+import styles from "./LandingPage.module.css";
+import landingpage from "../../Images/LandingPage/landingpage.jpg";
 
 const LandingPage = () => {
   const navigate = useNavigate();

@@ -12,7 +12,6 @@ export const PostProvider = ({ children }) => {
     postData: {},
   });
 
-  const username = localStorage.getItem("user");
   const userToken = localStorage.getItem("encodedToken");
 
   const getAllPosts = async () => {
@@ -34,10 +33,30 @@ export const PostProvider = ({ children }) => {
     try {
       const response = await fetch(`api/posts/user/${username}`);
       const userPosts = JSON.parse(response._bodyText).posts;
-      console.log(userPosts);
+      // console.log(userPosts);
 
       dispatchPostReducer({
         type: "SET_USER_POSTS",
+        payload: JSON.parse(response._bodyText).posts,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const createPost = async (input, token) => {
+    // console.log(userToken);
+    try {
+      const response = await fetch("/api/posts", {
+        method: "POST",
+        headers: { authorization: token },
+        body: JSON.stringify({ postData: { content: input } }),
+      });
+      console.log(response);
+
+      console.log(JSON.parse(response._bodyText).posts);
+      dispatchPostReducer({
+        type: "SET_ALL_POSTS",
         payload: JSON.parse(response._bodyText).posts,
       });
     } catch (error) {
@@ -72,14 +91,15 @@ export const PostProvider = ({ children }) => {
   };
 
   const deletePost = async (postId) => {
-    console.log(postId);
+    // console.log(postId);
     try {
       const response = await fetch(`/api/posts/${postId}`, {
         method: "DELETE",
         headers: { authorization: userToken },
       });
+      console.log(response);
 
-      console.log(JSON.parse(response._bodyText).posts);
+      // console.log(JSON.parse(response._bodyText).posts);
       dispatchPostReducer({
         type: "DELETE_POST",
         payload: JSON.parse(response._bodyText).posts,
@@ -96,10 +116,10 @@ export const PostProvider = ({ children }) => {
         headers: { authorization: userToken },
         body: JSON.stringify({ postData: { content: edit } }),
       });
-      console.log(JSON.parse(response._bodyInit));
+      console.log(JSON.parse(response._bodyText));
       dispatchPostReducer({
         type: "SAVE_EDIT",
-        payload: JSON.parse(response._bodyInit).posts,
+        payload: JSON.parse(response._bodyText).posts,
       });
     } catch (error) {
       console.log(error);
@@ -121,6 +141,7 @@ export const PostProvider = ({ children }) => {
           dislikePost,
           deletePost,
           editPost,
+          createPost,
         }}
       >
         {children}

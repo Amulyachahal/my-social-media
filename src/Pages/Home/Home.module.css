@@ -2,15 +2,22 @@
   background-color: #efefef;
 }
 
-.container {
-  max-width: 27.5rem;
-  border: solid 1px #efefef;
-  margin: 0 auto;
-  /* box-shadow: 0 0 20px rgba(0, 0, 0, 0.3); */
+.username::before {
+  content: "@";
 }
 
-.input {
-  padding: 2.5rem 1rem;
-  margin-bottom: 1rem;
-  font-size: 18px;
+.flexcontainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.suggestedusers {
+  /* margin-left: 66rem; */
+  align-self: flex-end;
+}
+
+.mainbody {
+  /* max-width: 150rem; */
+  /* margin-left: 30rem; */
+  align-self: center;
 }

@@ -1,7 +1,8 @@
-import Button from "../../Components/Button/Button";
-import styles from "./Login.module.css";
 import { useNavigate } from "react-router";
 import { useEffect, useState } from "react";
+
+import Button from "../../Components/Button/Button";
+import styles from "./Login.module.css";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -27,6 +28,7 @@ const Login = () => {
     if (loginAttempted && userData.foundUser) {
       localStorage.setItem("encodedToken", userData.encodedToken);
       localStorage.setItem("user", userData.foundUser.username);
+      localStorage.setItem("userId", userData.foundUser._id);
       navigate("/");
     }
     if (loginAttempted && userData.errors) {

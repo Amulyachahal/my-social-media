@@ -1,11 +1,13 @@
-import Button from "../Button/Button";
-import styles from "./Navbar.module.css";
-
 import { useNavigate } from "react-router";
 import { MdExplore, MdHome, MdBookmarks, MdLogout } from "react-icons/md";
 import { GiPlagueDoctorProfile } from "react-icons/gi";
 
+import Button from "../Button/Button";
+import styles from "./Navbar.module.css";
+import { NavLink } from "react-router-dom";
+
 const Navbar = () => {
+  const username = localStorage.getItem("user");
   const navigate = useNavigate();
   const logoutHandeler = () => {
     localStorage.clear();
@@ -29,13 +31,9 @@ const Navbar = () => {
       >
         Bookmarks
       </Button>
-      <Button
-        onClick={() => {
-          navigate("/profile");
-        }}
-      >
-        Profile
-      </Button>
+      <NavLink to={`/profile/${username}`}>
+        <Button>Profile</Button>
+      </NavLink>
       <Button onClick={logoutHandeler}>Logout </Button>
     </>
   );
