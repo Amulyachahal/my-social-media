@@ -22,6 +22,7 @@ const Post = ({ postData }) => {
 
   const userName = localStorage.getItem("user");
   const userToken = localStorage.getItem("encodedToken");
+  console.log(postData.createdAt);
 
   const addBookmarkHandler = () => {
     postBookmarkData(postData._id);
@@ -51,29 +52,47 @@ const Post = ({ postData }) => {
       <div className={styles.container}>
         <div className={styles.title}>{postData.username}</div>
         <div className={styles.username}>{postData.username}</div>
-        <div>Date</div>
         <div className={styles.content}>{postData.content}</div>
+        <div className={styles.date}>
+          {postData.createdAt.slice(11, 16) +
+            " " +
+            postData.createdAt.slice(0, 10)}
+        </div>
         <br />
         <div>
           {postState.liked[postData._id] ? (
-            <FcLike onClick={dislikeHandler} />
+            <div className={styles.icon}>
+              <FcLike onClick={dislikeHandler} />
+            </div>
           ) : (
-            <FcLikePlaceholder onClick={likeHandler} />
+            <div className={styles.icon}>
+              <FcLikePlaceholder onClick={likeHandler} />
+            </div>
           )}
-          <FcComments
-            onClick={() => {
-              console.log("commented");
-            }}
-          />
+          <div className={styles.icon}>
+            <FcComments
+              onClick={() => {
+                console.log("commented");
+              }}
+            />
+          </div>
           {userState.inBookmark[postData._id] ? (
-            <FcBookmark onClick={removeBookmarkHandler} />
+            <div className={styles.icon}>
+              <FcBookmark onClick={removeBookmarkHandler} />
+            </div>
           ) : (
-            <FiBookmark onClick={addBookmarkHandler} />
+            <div className={styles.icon}>
+              <FiBookmark onClick={addBookmarkHandler} />
+            </div>
           )}
           {postData.username === userName && (
             <>
-              <AiFillDelete onClick={deleteHandler} />
-              <AiFillEdit onClick={editHandler} />
+              <div className={styles.icon}>
+                <AiFillDelete onClick={deleteHandler} />
+              </div>
+              <div className={styles.icon}>
+                <AiFillEdit onClick={editHandler} />
+              </div>
             </>
           )}
         </div>

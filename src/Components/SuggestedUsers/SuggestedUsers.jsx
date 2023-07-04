@@ -6,7 +6,8 @@ import Button from "../Button/Button";
 import styles from "./SuggestedUsers.module.css";
 
 const Suggestedusers = () => {
-  const { userState, followUser, unfollowUser } = useContext(userContext);
+  const { userState, followUser, unfollowUser, getUser } =
+    useContext(userContext);
 
   const followHandler = (user) => {
     followUser(user._id);
@@ -14,6 +15,11 @@ const Suggestedusers = () => {
   const unfollowHandler = (user) => {
     unfollowUser(user._id);
   };
+
+  const profileHandler = (user) => {
+    getUser(user._id);
+  };
+
   return (
     <>
       <div className={styles.suggestedusers}>
@@ -26,7 +32,7 @@ const Suggestedusers = () => {
               </div>
               <div className={styles.username}>{user.username}</div>
               <div>
-                <Button>
+                <Button onClick={() => profileHandler}>
                   <NavLink
                     to={`/profile/${user.username}`}
                     style={{ textDecoration: "none", color: "white" }}

@@ -20,3 +20,17 @@
 .username::before {
   content: "@";
 }
+.icon {
+  font-size: 1.3rem;
+  cursor: pointer;
+  display: inline-block;
+  padding: 0rem 1rem;
+}
+.content {
+  font-size: 1.3rem;
+}
+.date {
+  font-size: 14px;
+  padding-top: 10px;
+  color: gray;
+}

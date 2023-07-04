@@ -9,7 +9,8 @@ import { formatDate } from "../utils/authUtils";
 export const posts = [
   {
     _id: uuid(),
-    content: "Post-1",
+    content:
+      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo doloremque quidem quae temporibus perspiciatis nobis. Sed ipsa recusandae magnam delectus accusamus earum quis odio. Vero saepe voluptatem possimus nam deserunt!",
     likes: {
       likeCount: 0,
       likedBy: [],
@@ -21,7 +22,8 @@ export const posts = [
   },
   {
     _id: uuid(),
-    content: "post-2",
+    content:
+      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo doloremque quidem quae temporibus perspiciatis nobis. Sed ipsa recusandae magnam delectus accusamus earum quis odio. Vero saepe voluptatem possimus nam deserunt!",
     likes: {
       likeCount: 0,
       likedBy: [],
@@ -33,7 +35,8 @@ export const posts = [
   },
   {
     _id: uuid(),
-    content: "post-3",
+    content:
+      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo doloremque quidem quae temporibus perspiciatis nobis. Sed ipsa recusandae magnam delectus accusamus earum quis odio. Vero saepe voluptatem possimus nam deserunt!",
     likes: {
       likeCount: 0,
       likedBy: [],
@@ -45,7 +48,8 @@ export const posts = [
   },
   {
     _id: uuid(),
-    content: "post-4",
+    content:
+      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo doloremque quidem quae temporibus perspiciatis nobis. Sed ipsa recusandae magnam delectus accusamus earum quis odio. Vero saepe voluptatem possimus nam deserunt!",
     likes: {
       likeCount: 0,
       likedBy: [],
