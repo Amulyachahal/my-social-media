@@ -37,3 +37,15 @@
   padding-top: 10px;
   color: gray;
 }
+/* @media screen and (max-width: 415px) {
+  .container {
+    max-width: 21rem;
+    margin-left: -3rem;
+  }
+} */
+@media screen and (max-width: 768px) {
+  .container {
+    max-width: 30rem;
+    margin: 0 auto;
+  }
+}

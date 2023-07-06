@@ -60,6 +60,7 @@ const Profile = () => {
               <a
                 className={styles.link}
                 target="_blank"
+                rel="noreferrer"
                 href="https://amulya-chahal-portfolio.netlify.app/"
               >
                 {userState.userData.website}

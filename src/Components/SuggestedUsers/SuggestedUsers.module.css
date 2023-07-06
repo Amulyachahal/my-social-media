@@ -20,3 +20,12 @@
   margin-bottom: 1rem;
   padding-bottom: 0.5rem;
 }
+@media screen and (max-width: 415px) {
+  .suggestedusers {
+    width: 21rem;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    align-self: flex-end;
+    display: inline-block;
+    margin-left: -4rem;
+  }
+}

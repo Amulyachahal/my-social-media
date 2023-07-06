@@ -16,25 +16,27 @@ const Navbar = () => {
 
   return (
     <>
-      <Button onClick={() => navigate("/home")}>Home</Button>
-      <Button
-        onClick={() => {
-          navigate("/explore");
-        }}
-      >
-        Explore
-      </Button>
-      <Button
-        onClick={() => {
-          navigate("/bookmarks");
-        }}
-      >
-        Bookmarks
-      </Button>
-      <NavLink to={`/profile/${username}`}>
-        <Button>Profile</Button>
-      </NavLink>
-      <Button onClick={logoutHandeler}>Logout </Button>
+      <div>
+        <Button onClick={() => navigate("/home")}>Home</Button>
+        <Button
+          onClick={() => {
+            navigate("/explore");
+          }}
+        >
+          Explore
+        </Button>
+        <Button
+          onClick={() => {
+            navigate("/bookmarks");
+          }}
+        >
+          Bookmarks
+        </Button>
+        <NavLink to={`/profile/${username}`}>
+          <Button>Profile</Button>
+        </NavLink>
+        <Button onClick={logoutHandeler}>Logout </Button>
+      </div>
     </>
   );
 };

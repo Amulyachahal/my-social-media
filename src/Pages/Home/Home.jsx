@@ -30,7 +30,7 @@ const Home = () => {
           <div className={styles.flexcontainer}>
             <div className={styles.mainbody}>
               <CreatePost />
-              <div style={{ display: "inline-block" }}>
+              <div className={styles.post}>
                 <ul style={{ display: "inline-block" }}>
                   {postState.allPosts.map((post, index) => (
                     <Post postData={post} key={index} />
