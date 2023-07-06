@@ -9,10 +9,8 @@ import landingpage from "../../Images/LandingPage/landingpage.jpg";
 
 const LandingPage = () => {
   const navigate = useNavigate();
-  const { userState } = useContext(userContext);
-  const { postState } = useContext(PostContext);
-  console.log("users: ", userState.users);
-  console.log("posts: ", postState.posts);
+  // const { userState } = useContext(userContext);
+  // const { postState } = useContext(PostContext);
   return (
     <>
       <div>

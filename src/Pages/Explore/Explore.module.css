@@ -1,0 +1,6 @@
+.container {
+  background-image: linear-gradient(rgb(0, 0, 0, 0.1), rgb(0, 0, 0, 0.1)),
+    url("../../Images/backgroundImage/bg_img_12.jpg");
+  background-position: center;
+  background-size: cover;
+}

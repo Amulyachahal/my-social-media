@@ -22,7 +22,6 @@ const Post = ({ postData }) => {
 
   const userName = localStorage.getItem("user");
   const userToken = localStorage.getItem("encodedToken");
-  console.log(postData.createdAt);
 
   const addBookmarkHandler = () => {
     postBookmarkData(postData._id);

@@ -1,6 +1,9 @@
+.modal {
+  /* background-color: aqua; */
+}
 .container {
   max-width: 30rem;
-  /* border: solid 1px #efefef; */
+  border: solid 1px #efefef;
   margin: 0 auto;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
 }
@@ -20,20 +23,9 @@
 .username::before {
   content: "@";
 }
-.icon {
-  font-size: 1.3rem;
-  cursor: pointer;
-  display: inline-block;
-  padding: 0rem 1rem;
-}
-.icon:hover {
-  font-size: 2rem;
-}
-.content {
-  font-size: 1.3rem;
-}
-.date {
-  font-size: 14px;
-  padding-top: 10px;
-  color: gray;
+.input {
+  padding: 0.5rem 1rem;
+  margin-bottom: 1rem;
+  font-size: 15px;
+  max-width: 20rem;
 }

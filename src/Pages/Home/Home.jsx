@@ -12,9 +12,9 @@ import { userContext } from "../../Contexts/UserContext";
 const Home = () => {
   const { postState } = useContext(PostContext);
   const { getUser, getAllUsers } = useContext(userContext);
-  const userId = localStorage.getItem("userId");
 
   useEffect(() => {
+    const userId = localStorage.getItem("userId");
     getUser(userId);
     getAllUsers();
   }, []);
@@ -30,8 +30,8 @@ const Home = () => {
           <div className={styles.flexcontainer}>
             <div className={styles.mainbody}>
               <CreatePost />
-              <div>
-                <ul>
+              <div style={{ display: "inline-block" }}>
+                <ul style={{ display: "inline-block" }}>
                   {postState.allPosts.map((post, index) => (
                     <Post postData={post} key={index} />
                   ))}

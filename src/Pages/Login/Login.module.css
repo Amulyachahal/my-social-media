@@ -2,8 +2,12 @@
   max-width: 400px;
   margin: 0 auto;
   padding: 20px;
-  border: 1px solid #ccc;
+  /* border: 1px solid #ccc; */
   border-radius: 4px;
+  background-image: linear-gradient(rgb(0, 0, 0, 0.1), rgb(0, 0, 0, 0.1)),
+    url("../../Images/backgroundImage/bg_img_12.jpg");
+  background-position: center;
+  background-size: cover;
 }
 
 h2 {
@@ -25,4 +29,5 @@ input {
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
+  /* padding-right: 1rem; */
 }

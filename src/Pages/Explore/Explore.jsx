@@ -5,24 +5,28 @@ import Post from "../../Components/Post/Post";
 import { PostContext } from "../../Contexts/PostContext";
 import { useContext } from "react";
 
+import styles from "./Explore.module.css";
+
 const Explore = () => {
   const { postState } = useContext(PostContext);
 
   return (
     <>
-      <Navbar />
-      <h1>Explore</h1>
-      {postState.isEditing ? (
-        <Modal />
-      ) : (
-        <div>
-          <ul>
-            {postState.allPosts.map((post, index) => (
-              <Post postData={post} key={index} />
-            ))}
-          </ul>
-        </div>
-      )}
+      <div className={styles.container}>
+        <Navbar />
+        <h1>Explore</h1>
+        {postState.isEditing ? (
+          <Modal />
+        ) : (
+          <div>
+            <ul>
+              {postState.allPosts.map((post, index) => (
+                <Post postData={post} key={index} />
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
     </>
   );
 };

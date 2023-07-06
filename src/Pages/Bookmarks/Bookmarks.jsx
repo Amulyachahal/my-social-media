@@ -1,6 +1,7 @@
 import Navbar from "../../Components/Navbar/Navbar";
 import Post from "../../Components/Post/Post";
 import Modal from "../../Components/Modal/Modal";
+import styles from "./Bookmarks.module.css";
 
 import { useContext, useEffect } from "react";
 import { userContext } from "../../Contexts/UserContext";
@@ -16,19 +17,21 @@ const Bookmarks = () => {
 
   return (
     <>
-      <Navbar />
-      <h1>Bookmarks</h1>
-      {postState.isEditing ? (
-        <Modal />
-      ) : (
-        <div>
-          <ul>
-            {userState.userBookmark.map((post, index) => (
-              <Post postData={post} key={index} />
-            ))}
-          </ul>
-        </div>
-      )}
+      <div className={styles.container}>
+        <Navbar />
+        <h1>Bookmarks</h1>
+        {postState.isEditing ? (
+          <Modal />
+        ) : (
+          <div>
+            <ul>
+              {userState.userBookmark.map((post, index) => (
+                <Post postData={post} key={index} />
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
     </>
   );
 };

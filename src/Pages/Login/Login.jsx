@@ -1,8 +1,8 @@
-import { useNavigate } from "react-router";
-import { useEffect, useState } from "react";
-
 import Button from "../../Components/Button/Button";
 import styles from "./Login.module.css";
+
+import { useNavigate } from "react-router";
+import { useEffect, useState } from "react";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -47,7 +47,7 @@ const Login = () => {
     setTimeout(() => {
       setLoginAttempted(true);
     }, 0);
-    fetchUser({ username: "adarshbalika", password: "adarshBalika123" });
+    fetchUser({ username: "amulyachahal", password: "amulyachahal123" });
   };
 
   return (

@@ -10,6 +10,7 @@ export const UserProvider = ({ children }) => {
     inBookmark: {},
     userData: {},
     following: {},
+    isEditing: false,
   });
 
   const userToken = localStorage.getItem("encodedToken");
@@ -97,13 +98,30 @@ export const UserProvider = ({ children }) => {
   const getUser = async (userId) => {
     try {
       const response = await fetch(`/api/users/${userId}`, { method: "GET" });
-      console.log(JSON.parse(response._bodyText));
+      console.log(JSON.parse(response._bodyText).user);
       dispatchUserReducer({
         type: "SET_USER",
-        payload: JSON.parse(response._bodyText),
+        payload: JSON.parse(response._bodyText).user,
       });
 
       // console.log(state.users);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const editUser = async (user, token) => {
+    try {
+      const response = await fetch("/api/users/edit", {
+        method: "POST",
+        headers: { authorization: token },
+        body: JSON.stringify({ userData: user }),
+      });
+      dispatchUserReducer({
+        type: "SAVE_EDIT",
+        payload: JSON.parse(response._bodyText).user,
+      });
+      console.log(JSON.parse(response._bodyText).user);
     } catch (error) {
       console.log(error);
     }
@@ -126,6 +144,7 @@ export const UserProvider = ({ children }) => {
         followUser,
         unfollowUser,
         getAllUsers,
+        editUser,
       }}
     >
       {children}

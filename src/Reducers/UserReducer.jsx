@@ -26,6 +26,12 @@ export const UserReducer = (state, action) => {
         ...state,
         following: { ...state.following, [action.payload]: false },
       };
+    case "START_USER_EDIT":
+      return { ...state, isEditing: true, postData: { ...action.value } };
+    case "SAVE_EDIT":
+      return { ...state, userData: { ...action.payload } };
+    case "END_USER_EDIT":
+      return { ...state, isEditing: false };
     default:
       return { state };
   }
