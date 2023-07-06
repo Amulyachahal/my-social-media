@@ -18,7 +18,7 @@ const Explore = () => {
         {postState.isEditing ? (
           <Modal />
         ) : (
-          <div>
+          <div className={styles.posts}>
             <ul>
               {postState.allPosts.map((post, index) => (
                 <Post postData={post} key={index} />

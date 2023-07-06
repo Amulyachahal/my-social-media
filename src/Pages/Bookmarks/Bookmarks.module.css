@@ -4,3 +4,9 @@
   background-position: center;
   background-size: cover;
 }
+@media screen and (max-width: 415px) {
+  .posts {
+    margin-left: -1rem;
+    width: 25rem;
+  }
+}

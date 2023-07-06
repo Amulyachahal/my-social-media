@@ -29,4 +29,10 @@ input {
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
+  margin-left: -0.7rem;
+}
+@media screen and (max-width: 415px) {
+  input {
+    width: 15rem;
+  }
 }

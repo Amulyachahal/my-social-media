@@ -25,9 +25,15 @@ label {
 }
 
 input {
-  width: 100%;
+  max-width: 20rem;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  /* padding-right: 1rem; */
+  margin-left: -0.7rem;
+}
+
+@media screen and (max-width: 415px) {
+  input {
+    width: 15rem;
+  }
 }

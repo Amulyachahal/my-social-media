@@ -82,7 +82,7 @@ const Profile = () => {
         {postState.isEditing ? (
           <Modal />
         ) : (
-          <div>
+          <div className={styles.posts}>
             <ul>
               {postState.userPosts.map((post, index) => (
                 <Post postData={post} key={index} />

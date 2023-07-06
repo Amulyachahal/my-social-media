@@ -23,7 +23,7 @@ const Bookmarks = () => {
         {postState.isEditing ? (
           <Modal />
         ) : (
-          <div>
+          <div className={styles.posts}>
             <ul>
               {userState.userBookmark.map((post, index) => (
                 <Post postData={post} key={index} />

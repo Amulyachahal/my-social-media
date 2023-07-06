@@ -44,3 +44,9 @@ span {
   max-height: 30rem;
   max-width: 25rem;
 }
+
+@media screen and (max-width: 415px) {
+  .img {
+    margin-left: -3.5rem;
+  }
+}

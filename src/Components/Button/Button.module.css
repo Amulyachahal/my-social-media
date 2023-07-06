@@ -6,13 +6,15 @@
   border: none;
 }
 
-.btn:hover {
+.btn:hover,
+.btn:focus,
+.btn:active {
   background-color: #be3d4f;
   cursor: pointer;
 }
 @media screen and (max-width: 415px) {
   .btn {
-    padding: 1rem 20rem;
+    padding: 1rem 1rem;
   }
 }
 @media screen and (max-width: 768px) {
