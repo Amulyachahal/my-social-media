@@ -2,9 +2,9 @@ import { useContext, useState } from "react";
 import { PostContext } from "../../Contexts/PostContext";
 
 import Button from "../Button/Button";
-import styles from "./Modal.module.css";
+import styles from "./EditPostModal.module.css";
 
-const Modal = () => {
+const EditPostModal = () => {
   const { postState, dispatchPostReducer, editPost } = useContext(PostContext);
 
   const postData = postState.postData;
@@ -18,7 +18,6 @@ const Modal = () => {
 
   const saveEditHandler = () => {
     editPost(edit, postData._id, userToken);
-    dispatchPostReducer({ type: "END_EDIT" });
   };
 
   const cancelEditHandler = () => {
@@ -50,4 +49,4 @@ const Modal = () => {
     </>
   );
 };
-export default Modal;
+export default EditPostModal;

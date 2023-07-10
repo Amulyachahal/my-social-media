@@ -1,4 +1,4 @@
-import Modal from "../../Components/Modal/Modal";
+import EditPostModal from "../../Components/EditPostModal/EditPostModal";
 import Navbar from "../../Components/Navbar/Navbar";
 import Post from "../../Components/Post/Post";
 
@@ -16,7 +16,7 @@ const Explore = () => {
         <Navbar />
         <h1>Explore</h1>
         {postState.isEditing ? (
-          <Modal />
+          <EditPostModal />
         ) : (
           <div className={styles.posts}>
             <ul>

@@ -1,6 +1,6 @@
 import Navbar from "../../Components/Navbar/Navbar";
 import Post from "../../Components/Post/Post";
-import Modal from "../../Components/Modal/Modal";
+import EditPostModal from "../../Components/EditPostModal/EditPostModal";
 import styles from "./Bookmarks.module.css";
 
 import { useContext, useEffect } from "react";
@@ -13,7 +13,7 @@ const Bookmarks = () => {
 
   useEffect(() => {
     getBookmarkData();
-  }, [userState.inBookmark, postState.isEditing]);
+  }, [userState.inBookmark]);
 
   return (
     <>
@@ -21,7 +21,7 @@ const Bookmarks = () => {
         <Navbar />
         <h1>Bookmarks</h1>
         {postState.isEditing ? (
-          <Modal />
+          <EditPostModal />
         ) : (
           <div className={styles.posts}>
             <ul>

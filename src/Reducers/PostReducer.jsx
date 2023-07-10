@@ -2,7 +2,6 @@ export const PostReducer = (state, action) => {
   switch (action.type) {
     case "SET_ALL_POSTS":
       return { ...state, allPosts: [...action.payload] };
-
     case "IS_LIKED":
       return { ...state, liked: { ...state.liked, [action.payload]: true } };
     case "IS_DISLIKED":
@@ -16,9 +15,19 @@ export const PostReducer = (state, action) => {
     case "START_EDIT":
       return { ...state, isEditing: true, postData: { ...action.value } };
     case "SAVE_EDIT":
-      return { ...state, allPosts: [...action.payload] };
-    case "END_EDIT":
-      return { ...state, isEditing: false };
+      return { ...state, isEditing: false, allPosts: [...action.payload] };
+    case "SHOW_POST":
+      return {
+        ...state,
+        showPost: true,
+        id: action.id,
+        singlePost: { ...action.value },
+      };
+    case "HIDE_POST":
+      return { ...state, showPost: false };
+    case "SORT_POST":
+      state.allPosts.map((post) => console.log(post.createdAt)); // state.allPosts.sort();
+      return { ...state, sortValue: action.payload };
     default:
       return { state };
   }

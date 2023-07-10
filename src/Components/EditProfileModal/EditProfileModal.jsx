@@ -1,10 +1,12 @@
-import styles from "./EditModal.module.css";
+import styles from "./EditProfileModal.module.css";
 import Button from "../Button/Button";
+import "react-toastify/dist/ReactToastify.css";
 
 import { useContext, useState } from "react";
 import { userContext } from "../../Contexts/UserContext";
+import { ToastContainer, toast } from "react-toastify";
 
-const EditModal = () => {
+const EditProfileModal = () => {
   const { userState, dispatchUserReducer, editUser } = useContext(userContext);
 
   const [user, setUser] = useState({
@@ -14,17 +16,13 @@ const EditModal = () => {
     website: userState.userData.website,
   });
   const userToken = localStorage.getItem("encodedToken");
-
   const cancelEditHandler = () => {
     dispatchUserReducer({ type: "END_USER_EDIT" });
   };
 
   const saveEditHandler = () => {
     editUser(user, userToken);
-    dispatchUserReducer({ type: "END_USER_EDIT" });
   };
-
-  const inputChangeHandler = () => {};
 
   return (
     <>
@@ -87,8 +85,9 @@ const EditModal = () => {
           </div>
           <p></p>
         </div>
+        <ToastContainer autoClose={3000} />
       </div>
     </>
   );
 };
-export default EditModal;
+export default EditProfileModal;

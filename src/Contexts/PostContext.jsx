@@ -7,9 +7,14 @@ export const PostProvider = ({ children }) => {
   const [postState, dispatchPostReducer] = useReducer(PostReducer, {
     allPosts: [],
     userPosts: [],
+    followedUserPosts: [],
     liked: {},
     isEditing: false,
     postData: {},
+    sortValue: "",
+    singlePost: {},
+    showPost: false,
+    post_id: "",
   });
 
   const getAllPosts = async () => {
@@ -35,6 +40,27 @@ export const PostProvider = ({ children }) => {
         type: "SET_USER_POSTS",
         payload: JSON.parse(response._bodyText).posts,
       });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getPost = async (postId) => {
+    console.log("before try...");
+
+    try {
+      console.log("before response...");
+
+      const response = await fetch(`/api/posts/${postId}`);
+      console.log(JSON.parse(response._bodyText).post);
+      console.log("after response...");
+
+      dispatchPostReducer({
+        type: "SHOW_POST",
+        value: JSON.parse(response._bodyText).post,
+        id: postId,
+      });
+      console.log("after dispatch...");
     } catch (error) {
       console.log(error);
     }
@@ -138,6 +164,7 @@ export const PostProvider = ({ children }) => {
           deletePost,
           editPost,
           createPost,
+          getPost,
         }}
       >
         {children}

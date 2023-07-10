@@ -3,6 +3,7 @@
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
   align-self: flex-end;
   display: inline-block;
+  padding: 10px 0px;
 }
 .heading {
   font-size: 24px;

@@ -1,17 +1,45 @@
 .container {
   max-width: 27.5rem;
-  /* border: solid 1px #efefef; */
   margin: 0 auto;
   margin-top: 1rem;
-
-  /* box-shadow: 0 0 20px rgba(0, 0, 0, 0.3); */
 }
 .input {
+  border: none;
   padding: 2.5rem 1rem;
   margin-bottom: 1rem;
+  margin-left: 1rem;
   font-size: 18px;
   background-color: #e3e3e3;
 }
+.sortcontainer {
+  padding: 10px;
+  margin: 15px;
+  font-size: 16px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  margin-left: 25px;
+}
+.dropdown {
+  background-color: #e3e3e3;
+  cursor: pointer;
+  align-self: flex-end;
+  margin-top: -15px;
+  border-radius: 9px;
+  font-size: 15px;
+}
+.option {
+}
+
+.sortvalue {
+  align-self: flex-start;
+  font-weight: 500;
+  color: rgb(63, 63, 63);
+}
+.sortvalue::after {
+  content: " Posts";
+}
+
 @media screen and (max-width: 415px) {
   .input {
     max-width: 15rem;

@@ -1,5 +1,6 @@
 import { createContext, useEffect, useReducer } from "react";
 import { UserReducer } from "../Reducers/UserReducer";
+import { toast } from "react-toastify";
 
 export const userContext = createContext();
 
@@ -35,7 +36,10 @@ export const UserProvider = ({ children }) => {
         headers: { authorization: userToken },
       });
       console.log(JSON.parse(response._bodyText));
-      dispatchUserReducer({ type: "FOLLOW", payload: followUserId });
+      dispatchUserReducer({
+        type: "FOLLOW",
+        payload: followUserId,
+      });
     } catch (error) {
       console.log(error);
     }
@@ -98,7 +102,7 @@ export const UserProvider = ({ children }) => {
   const getUser = async (userId) => {
     try {
       const response = await fetch(`/api/users/${userId}`, { method: "GET" });
-      console.log(JSON.parse(response._bodyText).user);
+      console.log(JSON.parse(response._bodyText));
       dispatchUserReducer({
         type: "SET_USER",
         payload: JSON.parse(response._bodyText).user,
@@ -118,9 +122,10 @@ export const UserProvider = ({ children }) => {
         body: JSON.stringify({ userData: user }),
       });
       dispatchUserReducer({
-        type: "SAVE_EDIT",
+        type: "SAVE_USER_EDIT",
         payload: JSON.parse(response._bodyText).user,
       });
+
       console.log(JSON.parse(response._bodyText).user);
     } catch (error) {
       console.log(error);

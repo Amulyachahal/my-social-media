@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router";
+import styles from "./Navbar.module.css";
 // import { MdExplore, MdHome, MdBookmarks, MdLogout } from "react-icons/md";
 // import { GiPlagueDoctorProfile } from "react-icons/gi";
 
@@ -16,7 +17,7 @@ const Navbar = () => {
 
   return (
     <>
-      <div>
+      <div className={styles.navbar}>
         <Button onClick={() => navigate("/home")}>Home</Button>
         <Button
           onClick={() => {

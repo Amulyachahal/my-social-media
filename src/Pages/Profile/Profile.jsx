@@ -1,9 +1,9 @@
 import styles from "./Profile.module.css";
 import Navbar from "../../Components/Navbar/Navbar";
 import Post from "../../Components/Post/Post";
-import Modal from "../../Components/Modal/Modal";
+import Modal from "../../Components/EditPostModal/EditPostModal";
 import Button from "../../Components/Button/Button";
-import EditModal from "../../Components/EditModal/EditModal";
+import EditProfileModal from "../../Components/EditProfileModal/EditProfileModal";
 
 import { useContext, useEffect } from "react";
 import { useNavigate, useParams } from "react-router";
@@ -11,14 +11,13 @@ import { PostContext } from "../../Contexts/PostContext";
 import { userContext } from "../../Contexts/UserContext";
 
 const Profile = () => {
-  const { postState, getUserPosts } = useContext(PostContext);
+  const { postState, getUserPosts, deletePost } = useContext(PostContext);
   const { userState, getUser, dispatchUserReducer } = useContext(userContext);
   const { username } = useParams();
   const navigate = useNavigate();
   const user = localStorage.getItem("user");
 
   const userData = userState.users.find((user) => user.username === username);
-  console.log(userState.userData);
 
   const logoutHandeler = () => {
     localStorage.clear();
@@ -31,7 +30,7 @@ const Profile = () => {
 
   useEffect(() => {
     getUserPosts(userData.username);
-  }, [postState.isEditing]);
+  }, [postState.isEditing, postState.deletePost]);
 
   useEffect(() => {
     getUser(userData._id);
@@ -43,7 +42,7 @@ const Profile = () => {
         <Navbar />
         <h1>Profile</h1>
         {userState.isEditing ? (
-          <EditModal />
+          <EditProfileModal />
         ) : (
           <div className={styles.container}>
             <img
@@ -68,8 +67,8 @@ const Profile = () => {
             </div>
 
             <div>
-              {/* <div>{userData.following.length} Following</div>
-          <div>{userData.followers.length} Followers</div> */}
+              <div>{userData.following.length} Following</div>
+              <div>{userData.followers.length} Followers</div>
             </div>
             {userState.userData.username === user && (
               <div>
