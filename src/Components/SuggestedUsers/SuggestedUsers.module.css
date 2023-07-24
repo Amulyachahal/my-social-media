@@ -21,6 +21,9 @@
   margin-bottom: 1rem;
   padding-bottom: 0.5rem;
 }
+.username::before {
+  content: "@";
+}
 @media screen and (max-width: 415px) {
   .suggestedusers {
     width: 21rem;

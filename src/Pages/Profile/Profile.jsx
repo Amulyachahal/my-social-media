@@ -4,11 +4,13 @@ import Post from "../../Components/Post/Post";
 import Modal from "../../Components/EditPostModal/EditPostModal";
 import Button from "../../Components/Button/Button";
 import EditProfileModal from "../../Components/EditProfileModal/EditProfileModal";
+import PostModal from "../../Components/PostModal/PostModal";
 
 import { useContext, useEffect } from "react";
 import { useNavigate, useParams } from "react-router";
 import { PostContext } from "../../Contexts/PostContext";
 import { userContext } from "../../Contexts/UserContext";
+import CreatePost from "../../Components/CreatePost/CreatePost";
 
 const Profile = () => {
   const { postState, getUserPosts, deletePost } = useContext(PostContext);
@@ -30,10 +32,12 @@ const Profile = () => {
 
   useEffect(() => {
     getUserPosts(userData.username);
-  }, [postState.isEditing, postState.deletePost]);
+  }, [postState.isEditing, postState.allPosts, postState.createdPosts]);
 
   useEffect(() => {
-    getUser(userData._id);
+    const userId = localStorage.getItem("userId");
+
+    getUser(userId);
   }, [userState.isEditing]);
 
   return (
@@ -78,15 +82,20 @@ const Profile = () => {
             )}
           </div>
         )}
+        <CreatePost />
         {postState.isEditing ? (
           <Modal />
         ) : (
           <div className={styles.posts}>
-            <ul>
-              {postState.userPosts.map((post, index) => (
-                <Post postData={post} key={index} />
-              ))}
-            </ul>
+            {postState.showPost ? (
+              <PostModal />
+            ) : (
+              <ul>
+                {postState.userPosts.map((post, index) => (
+                  <Post postData={post} key={index} />
+                ))}
+              </ul>
+            )}
           </div>
         )}
       </div>

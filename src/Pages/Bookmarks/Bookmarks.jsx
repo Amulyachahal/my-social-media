@@ -2,6 +2,7 @@ import Navbar from "../../Components/Navbar/Navbar";
 import Post from "../../Components/Post/Post";
 import EditPostModal from "../../Components/EditPostModal/EditPostModal";
 import styles from "./Bookmarks.module.css";
+import PostModal from "../../Components/PostModal/PostModal";
 
 import { useContext, useEffect } from "react";
 import { userContext } from "../../Contexts/UserContext";
@@ -13,7 +14,7 @@ const Bookmarks = () => {
 
   useEffect(() => {
     getBookmarkData();
-  }, [userState.inBookmark]);
+  }, [userState.inBookmark, postState.isEditing]);
 
   return (
     <>
@@ -24,11 +25,15 @@ const Bookmarks = () => {
           <EditPostModal />
         ) : (
           <div className={styles.posts}>
-            <ul>
-              {userState.userBookmark.map((post, index) => (
-                <Post postData={post} key={index} />
-              ))}
-            </ul>
+            {postState.showPost ? (
+              <PostModal />
+            ) : (
+              <ul>
+                {userState.userBookmark.map((post, index) => (
+                  <Post postData={post} key={index} />
+                ))}
+              </ul>
+            )}
           </div>
         )}
       </div>

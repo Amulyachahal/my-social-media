@@ -20,19 +20,7 @@ export const posts = [
     createdAt: formatDate(),
     updatedAt: formatDate(),
   },
-  {
-    _id: uuid(),
-    content:
-      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo doloremque quidem quae temporibus perspiciatis nobis. Sed ipsa recusandae magnam delectus accusamus earum quis odio. Vero saepe voluptatem possimus nam deserunt!",
-    likes: {
-      likeCount: 0,
-      likedBy: [],
-      dislikedBy: [],
-    },
-    username: "shubhamsoni",
-    createdAt: formatDate(),
-    updatedAt: formatDate(),
-  },
+
   {
     _id: uuid(),
     content:

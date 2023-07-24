@@ -4,12 +4,14 @@ body {
 
 h1 {
   font-size: 48px;
+  /* margin-top: -100px; */
 }
 
 .container {
   display: inline-block;
   max-width: 50rem;
   text-align: start;
+  /* margin-top: -140px; */
   /* border: 1px solid black; */
 }
 
@@ -28,10 +30,15 @@ span {
 }
 
 .link {
-  color: #ea4355;
+  color: rgba(156, 5, 5, 0.865);
   text-decoration: none;
   font-size: 17px;
   margin: 1rem;
+  transition: all 0.2s;
+}
+.link:hover {
+  color: #ea4355;
+  font-size: 1.2rem;
 }
 
 .banner {
@@ -43,10 +50,21 @@ span {
 .img {
   max-height: 30rem;
   max-width: 25rem;
+  margin-bottom: -3.7px;
+  /* transition: all 1s; */
+}
+.img:hover {
+  /* transform: rotate(6deg); */
+}
+.card {
+  /* display: inline-block; */
 }
 
 @media screen and (max-width: 415px) {
   .img {
     margin-left: -3.5rem;
+  }
+  .card:hover {
+    /* transform: rotate(20deg); */
   }
 }

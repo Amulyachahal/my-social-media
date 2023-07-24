@@ -1,14 +1,23 @@
 import { NavLink } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { userContext } from "../../Contexts/UserContext";
 
 import Button from "../Button/Button";
 import styles from "./SuggestedUsers.module.css";
+import { PostContext } from "../../Contexts/PostContext";
 
 const Suggestedusers = () => {
   const { userState, followUser, unfollowUser, getUser } =
     useContext(userContext);
+  const { getFollowedUserPosts, postState } = useContext(PostContext);
+
   const userName = localStorage.getItem("user");
+
+  const followedUserData = userState.userData.following;
+
+  console.log(followedUserData);
+  console.log("in suggested users");
+  console.log(postState.followedUserPosts);
 
   const followHandler = (user) => {
     followUser(user._id);
@@ -20,6 +29,17 @@ const Suggestedusers = () => {
   const profileHandler = (user) => {
     getUser(user._id);
   };
+
+  useEffect(() => {
+    if (followedUserData) {
+      console.log("in use effect");
+
+      userState.userData.following.map((user) =>
+        getFollowedUserPosts(user.username)
+      );
+      console.log("before exiting use effect");
+    }
+  }, [followedUserData]);
 
   return (
     <>

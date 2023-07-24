@@ -2,12 +2,14 @@ import Button from "../../Components/Button/Button";
 import styles from "./Login.module.css";
 
 import { useNavigate } from "react-router";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { userContext } from "../../Contexts/UserContext";
 
 const Login = () => {
   const navigate = useNavigate();
+  const { getUser } = useContext(userContext);
   const [loginCreds, setLoginCreds] = useState({ username: "", password: "" });
   const [userData, setUserData] = useState({});
   const [loginAttempted, setLoginAttempted] = useState(false);
@@ -18,9 +20,12 @@ const Login = () => {
         method: "POST",
         body: JSON.stringify(loginData),
       });
-      const data = JSON.parse(response._bodyText);
-      setUserData(JSON.parse(response._bodyText));
-      console.log(data);
+      console.log(response);
+      if (response.status === 200) {
+        const data = JSON.parse(response._bodyText);
+        setUserData(JSON.parse(response._bodyText));
+        console.log(data);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -31,6 +36,7 @@ const Login = () => {
       localStorage.setItem("encodedToken", userData.encodedToken);
       localStorage.setItem("user", userData.foundUser.username);
       localStorage.setItem("userId", userData.foundUser._id);
+      // getUser(userData.foundUser._id);
       navigate("/home");
     }
     if (loginAttempted && userData.errors) {

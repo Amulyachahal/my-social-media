@@ -21,6 +21,14 @@ export const UserReducer = (state, action) => {
         ...state,
         following: { ...state.following, [action.payload]: true },
       };
+    case "FOLLOWED_USER":
+      return {
+        ...state,
+        followedUser: {
+          ...state,
+          followedUsers: [...state.followedUsers, { ...action.payload }],
+        },
+      };
     case "UN_FOLLOW":
       return {
         ...state,

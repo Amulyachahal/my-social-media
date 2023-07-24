@@ -11,6 +11,7 @@ export const UserProvider = ({ children }) => {
     inBookmark: {},
     userData: {},
     following: {},
+    followedUsers: [],
     isEditing: false,
   });
 
@@ -19,7 +20,7 @@ export const UserProvider = ({ children }) => {
   const getAllUsers = async () => {
     try {
       const response = await fetch("/api/users");
-
+      // console.log(JSON.parse(response._bodyText).users);
       dispatchUserReducer({
         type: "SET_ALL_USERS",
         payload: JSON.parse(response._bodyText).users,
@@ -40,6 +41,10 @@ export const UserProvider = ({ children }) => {
         type: "FOLLOW",
         payload: followUserId,
       });
+      dispatchUserReducer({
+        type: "FOLLOWED_USER",
+        payload: JSON.parse(response._bodyText).followuser,
+      });
     } catch (error) {
       console.log(error);
     }
@@ -51,7 +56,7 @@ export const UserProvider = ({ children }) => {
         method: "POST",
         headers: { authorization: userToken },
       });
-      console.log(JSON.parse(response._bodyText));
+      // console.log(JSON.parse(response._bodyText));
       dispatchUserReducer({ type: "UN_FOLLOW", payload: followUserId });
     } catch (error) {
       console.log(error);
@@ -102,7 +107,7 @@ export const UserProvider = ({ children }) => {
   const getUser = async (userId) => {
     try {
       const response = await fetch(`/api/users/${userId}`, { method: "GET" });
-      console.log(JSON.parse(response._bodyText));
+      // console.log(JSON.parse(response._bodyText));
       dispatchUserReducer({
         type: "SET_USER",
         payload: JSON.parse(response._bodyText).user,

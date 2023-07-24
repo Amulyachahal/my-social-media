@@ -1,8 +1,9 @@
 import { useNavigate } from "react-router";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import styles from "./Signup.module.css";
 import Button from "../../Components/Button/Button";
+import { PostContext } from "../../Contexts/PostContext";
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -14,6 +15,8 @@ const Signup = () => {
     username: "",
     password: "",
   });
+
+  const { dispatchPostReducer } = useContext(PostContext);
 
   const signupUser = async (userData) => {
     try {
@@ -37,6 +40,7 @@ const Signup = () => {
 
   useEffect(() => {
     if (signupAttempted && responseData.createdUser) {
+      // dispatchPostReducer({ type: "RESET_IS_LIKED" });
       navigate("/login");
     }
     if (signupAttempted && responseData.errors) {

@@ -6,26 +6,36 @@ import Suggestedusers from "../../Components/SuggestedUsers/SuggestedUsers";
 import CreatePost from "../../Components/CreatePost/CreatePost";
 import PostModal from "../../Components/PostModal/PostModal";
 
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { PostContext } from "../../Contexts/PostContext";
 import { userContext } from "../../Contexts/UserContext";
+import BasicModal from "../../Components/BasicModal/BasicModal";
 
 const Home = () => {
   const { postState, getUserPosts } = useContext(PostContext);
-  const { userState, getUser, getAllUsers, followUser } =
-    useContext(userContext);
+  const { userState, getUser, getAllUsers } = useContext(userContext);
+  const [userFeed, setUserFeed] = useState([]);
 
   useEffect(() => {
     getAllUsers();
   }, []);
 
-  const followedUserData = userState.userData.following;
+  useEffect(() => {
+    const username = localStorage.getItem("user");
+    getUserPosts(username);
+  }, [postState.createdPosts, postState.isEditing, postState.allPosts]);
 
-  console.log(followedUserData);  
-
-  const followedUsers = () => {
-    // userState.userData.following;
-  };
+  useEffect(() => {
+    if (postState.followedUserPosts) {
+      const uniqueArray = postState.followedUserPosts.reduce((acc, obj) => {
+        if (!acc.find((item) => item._id === obj._id)) {
+          acc.push(obj);
+        }
+        return acc;
+      }, []);
+      setUserFeed(uniqueArray);
+    }
+  }, [postState.followedUserPosts]);
 
   useEffect(() => {
     const userId = localStorage.getItem("userId");
@@ -39,6 +49,7 @@ const Home = () => {
         {postState.showPost ? (
           <PostModal />
         ) : (
+          // <BasicModal open={postState.showPost} />
           <>
             <h1>Home</h1>
             {postState.isEditing ? (
@@ -49,7 +60,10 @@ const Home = () => {
                   <CreatePost />
                   <div className={styles.post}>
                     <ul style={{ display: "inline-block" }}>
-                      {postState.allPosts.map((post, index) => (
+                      {userFeed.map((post, index) => (
+                        <Post postData={post} key={index} />
+                      ))}
+                      {postState.userPosts.map((post, index) => (
                         <Post postData={post} key={index} />
                       ))}
                     </ul>
@@ -60,9 +74,11 @@ const Home = () => {
                 </div>
               </div>
             )}
+            {/* <BasicModal /> */}
           </>
         )}
       </div>
+      {/* <BasicModal /> */}
     </>
   );
 };

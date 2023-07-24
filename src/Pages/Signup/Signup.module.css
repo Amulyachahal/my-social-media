@@ -8,6 +8,8 @@
     url("../../Images/backgroundImage/bg_img_12.jpg");
   background-position: center;
   background-size: cover;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 1);
+  margin-top: 3rem;
 }
 
 h2 {
