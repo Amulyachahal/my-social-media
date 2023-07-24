@@ -18,10 +18,12 @@ const PostModal = () => {
   return (
     <>
       {" "}
-      <Button onClick={returnHandler}>Back</Button>
       <div className={styles.container}>
         <Post postData={postState.singlePost} />
       </div>
+      <Button style={{ marginBottom: "2rem" }} onClick={returnHandler}>
+        Back
+      </Button>
     </>
   );
 };

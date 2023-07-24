@@ -8,6 +8,7 @@
     url("../../Images/backgroundImage/bg_img_12.jpg");
   background-position: center;
   background-size: cover;
+  margin-bottom: 1.5rem;
 }
 
 .title {
