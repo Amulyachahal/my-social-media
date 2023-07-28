@@ -5,12 +5,12 @@ import Modal from "../../Components/EditPostModal/EditPostModal";
 import Button from "../../Components/Button/Button";
 import EditProfileModal from "../../Components/EditProfileModal/EditProfileModal";
 import PostModal from "../../Components/PostModal/PostModal";
+import CreatePost from "../../Components/CreatePost/CreatePost";
 
 import { useContext, useEffect } from "react";
 import { useNavigate, useParams } from "react-router";
 import { PostContext } from "../../Contexts/PostContext";
 import { userContext } from "../../Contexts/UserContext";
-import CreatePost from "../../Components/CreatePost/CreatePost";
 
 const Profile = () => {
   const { postState, getUserPosts, deletePost } = useContext(PostContext);
@@ -36,9 +36,8 @@ const Profile = () => {
 
   useEffect(() => {
     const userId = localStorage.getItem("userId");
-
-    getUser(userId);
-  }, [userState.isEditing]);
+    getUser(userData._id);
+  }, [userState.isEditing, userState.userData.following]);
 
   return (
     <>
@@ -70,10 +69,12 @@ const Profile = () => {
               </a>
             </div>
 
-            <div>
-              <div>{userData.following.length} Following</div>
-              <div>{userData.followers.length} Followers</div>
-            </div>
+            {userData && (
+              <div>
+                <div>{userData.following.length} Following</div>
+                <div>{userData.followers.length} Followers</div>
+              </div>
+            )}
             {userState.userData.username === user && (
               <div>
                 <Button onClick={editHandler}>Edit Profile</Button>
@@ -82,7 +83,7 @@ const Profile = () => {
             )}
           </div>
         )}
-        <CreatePost />
+        {userState.userData.username === user && <CreatePost />}
         {postState.isEditing ? (
           <Modal />
         ) : (
