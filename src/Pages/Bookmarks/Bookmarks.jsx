@@ -21,20 +21,26 @@ const Bookmarks = () => {
       <div className={styles.container}>
         <Navbar />
         <h1>Bookmarks</h1>
-        {postState.isEditing ? (
-          <EditPostModal />
+        {userState.userBookmark.length == 0 ? (
+          <div className={styles.message}>No Bookmarks 📪</div>
         ) : (
-          <div className={styles.posts}>
-            {postState.showPost ? (
-              <PostModal />
+          <>
+            {postState.isEditing ? (
+              <EditPostModal />
             ) : (
-              <ul>
-                {userState.userBookmark.map((post, index) => (
-                  <Post postData={post} key={index} />
-                ))}
-              </ul>
+              <div className={styles.posts}>
+                {postState.showPost ? (
+                  <PostModal />
+                ) : (
+                  <ul>
+                    {userState.userBookmark.map((post, index) => (
+                      <Post postData={post} key={index} />
+                    ))}
+                  </ul>
+                )}
+              </div>
             )}
-          </div>
+          </>
         )}
       </div>
     </>
